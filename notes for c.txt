@@ -1,0 +1,457 @@
+Instruction and information: A C program has both.
+RAM is a sequence of bytes (8 bits) --> 1 byte.
+Each byte has a unique address in RAM.
+C must access bytes in order to store information.
+
+Binary - goes by powers of 2 and starts from 1.
+
+001 = 1 - (1 bit)
+000 = 0 - (0 bits)
+etc. 128, 64, 32, 16, 8, 4, 2, 1
+
+Each of these bytes will be given an address, which will allow us to recognize it, and find it.
+
+C uses types to represent data.
+
+char, unsigned char, short, unsigned short, int, unsigned int, long long, unsigned long long.
+
+char: 8 bits (1 byte) it can represent numbers from -128 to -127 | basic arithmetic is affected by it, which will allow it to handle all usual processes, division, subtraction, addition, multiplication, etc.
+
+unsigned char:  8 bits (1 byte) it can represent numbers from 0 to 255.
+
+short: 16 bits (2 bytes) | range: -32768 to +32767.
+
+unsigned short: 16 bits (2 bytes) | range 0 to 65536.
+
+int: 32 bits (4 bytes) | it is generally the data structure we use the most, because it allows us to do most processes.
+
+unsigned int: 32 bits (4 bytes) | range: 0 to 4294967296
+
+long long: 64 bits (8 bytes) | range -9223372036854775808 to +... (infinity?)
+
+unsigned long long: 64 bits (8 bytes) | range 0 to 1844674407370955161...
+
+* --> (asterisk/star/pointer) : allows to hold not just data, but the address of a data | range: ADDRESS
+we consider that a data's address is also a data itself, but there's a special arithmetic that we'll see later on.
+
+A program is a set of functions.
+
+A function is a closed entity that has: Input data: the parameters | A piece of output data: the return value.
+
+A function is made of: Instructions for the CPU | Local data: the variables.
+
+A program's structure, is a set of functions. What we call a function, is an entity said to be closed because data in this entity are supposed to be closed to the rest of the world, which gets this information, which we call parameters, and which will return a result, and between the two we have a process, and we'll see how it works.
+
+A function is always made of two things: instructions, and local variables.
+
+A function can be declared rather simply. We define its type, meaning the type of what the function returns, because a function takes values as entries we call parameters, and returns a result.
+
+FUNCTION DECLARATION: type    name(type1param1,type2 param2,...)
+                                                BLOCK
+
+Block: 
+        {
+            Local variables declaration
+
+            instructions;
+        }
+
+So the type you first see in the prototype, is the return value's type, then we have the function name, and then the list of parameters, which are every time, the type of the 1st parameter, the name of the 1st parameter, the type of the 2nd parameter, the name of the 2nd parameter, etc, etc... There can be as many parameters as we want, there can also be none at all.
+
+If there's no parameter, we simply write opening parenthesis, and closing parenthesis. That is what defines what the function returns, and what it takes for parameters, and right after, there's what we call a block.
+
+A block contains the function itself.
+
+A function is always split into 2 parts.
+
+The second part, the block, is between curly brackets. So there's an opening curly bracket, the declaration of local variables, followed by instructions.
+
+There could only be one instruction, there could be no local variable, there could be no instruction, and we always end with a closing curly bracket.
+
+Example of a small function:
+
+Here we'll declare a function called sum(), which returns an int, and which takes 2 parameters:
+
+a parameter "value1", which is of type int, and a 2nd parameter "value 2," which is also an int.
+
+This function starts a block, so opening curly bracket.
+
+int sum(int value1, int value2)
+{
+    int total;
+
+    instructions
+}
+
+"int total" declares a new int called "total", and is a local variable to the function. The functions are closed, which means outside of the function, this variable doesn't exist.
+
+Therefore, it's local. Then we've got the instructions.
+
+In this example, there aren't any, but that's where they'd be.
+
+And finally, the closing curly bracket: end of the block, end of the function.
+
+In C, we can declare what we call combined types. They're data structures, which are made of elementary types, which we saw earlier on. There are a few, but during this bootcamp, we'll only use 2.
+
+The first is the array. An array is a succession of objects of the same type (in the memory).
+
+It's easily declared: type, name, opening square bracket, number of elements in the array, closing square bracket.
+
+EXAMPLE OF COMPOUND TYPES:
+
+Arrays:
+        type        name(numeric_value);                int tab[42];
+
+Structures: struct   struct_name                       struct s_fortytwo
+                    {                                                          {
+                        type name;                                        int a;
+                        type name;                                        char b[21];
+                    };                                                         };
+Declaration:
+ 
+    struct struct_name name;                              struct s_fortytwo a;             
+
+You've got an example up here, "int tab [42]", which is the declaration of an array, which can contain 42 ints. The array's index goes from 0 to 41.
+
+WE ALWAYS START AT 0. So, with this array, you've reserved 42 ints in the memory.
+To access them, we write the name, opening square bracket, the number of the int we want, closing square bracket, the number of the int we want, closing square bracket.
+
+For example, if we write "int tab[12]", we'll get the 13th int.
+
+The second combined type is a bit more complex, and we'll use it later on, is called data structure.
+
+The structure will allow us to define the representation of an object in memory which will be made of basic elements, that could very well be structures too.
+
+You have to know we can interlink structures, arrays, etc...
+
+Let's check out how to declare a structure.
+
+We write "struct", the name of our structure, opening curly bracket, we declare this structure's components (type, name, etc...) closing curly bracket and semi-colon. Here, we've just declared a structure. (up top) where we declare a structure "s_fortytwo". It's made of an int called "a", and an array of 21 characters, called "b".
+
+We define it in a simple manner, indicated below. We declare the structure, and when we write "struct", name of the structure, name of the variable, semi-colon, it reserves the necessary memory area, and when we use this name, the program will know we're talking about a structure. The compiler in C is usually pretty permissive. In terms of syntax, you can write things in many different ways, but to make things more readable, and have some sort of consistency, we've defined a standard (Norm). (This standard will be presented later on.)
+
+It's important to understand that using this standard has a lot of advantages.
+
+The 1st advantage is that it allows you to easily read each other's code.
+
+The 2nd is that it helps learn how to program in a structured way.
+
+You'll see that even if you've already programmed before, the school's standard will still be an adjustment. The biggest advantage is that it gives us a "look and feel" and helps for the reading.
+
+When we'll read someone else's code, being used to a standard will allow us to read faster.
+
+We have a program that checks whether the standard's been respected.
+
+We've seen that a program was a set of functions, and that there can be many functions. So where to start from? It has been defined, that in C syntax, originally, the function that will be executed first, the one that'll trigger the program's execution, is the function main().
+
+So if you create a program, somewhere in your code, there'll be a function main(). It's a function that takes a certain number of parameters, you'll see later how they work and how to use them.
+
+Entry point:
+
+Where to start from?
+
+A mandatory function with a specific name:
+    main
+
+Somewhere in your code, there must be:
+int main()
+{
+
+}
+
+main() returns an int, but you'll see how this also works. This way, you'll systematically have this declaration: "int main", the parameters between parenthesis, if there are any, and the function's block.
+
+Now that we've seen the general structure of a program, and we've seen how to represent data, all that remains is how instructions work. Of course, now that we now how to declare data, we need to learn how to act on these data. It's quite simple.
+
+There are 3 types of instructions. There's what we call "blocks", which, as we've seen, are always made of an opening curly bracket, a collection of local variable declarations (local to the block), instructions which will be executed by that block, and a closing curly bracket.
+
+There's also what we call "expressions", which will be followed by a semi-colon, which will be followed by a semi, and make a numerical calculation, or evaluation, happen. And then, we have what we call "control structures", which allows to control the proceedings of a series of instructions, inside a block.
+
+
+
+3 kinds of instructions:
+
+Blocks:
+    {
+        declarations;
+        instructions;
+    {
+
+Expressions:
+    expression;
+    An expression is a computation that always evaluates to a numerical value.
+
+Control structures
+
+Let's start with expressions
+
+Expressions
+
+Immediate numerical values:
+    0    42    0x1A    010
+
+Variables:
+a                with int a; for instance.
+b[18]         with char b[63]; for instance
+sft_var.a   with a struture
+
+Function calls:
+sum(18, a)
+
+Computations: + * / % ()
+1 + 3 - (a * 42 + b(0) / sum(21, 34 -b[10])
+
+Assignations:
+a = 42
+b[2 + a] = sum(12, 30)
+sft_var.a = 0
+
+So expressions, as we've said, are a set of evaluations, which will give results. 
+The simplest of evaluations, is a numerical value.
+
+For example, if you wrote a number, here 0 and 42, can write it in hex (0XA), in octal (010), and it’ll evaluate itself to its own value, meaning that the compiler will make sure it’s worth its result.
+
+The 2nd type of expression: Variables: once we’ve got a variable, when we use it, it’ll go evaluate directly to the variable’s value.
+
+If, for instance, you have a value in an int “a”, like in the example, when you write “a”, it’ll be worth the value that’s in “a”.
+
+Same thing for an array: If you wrote b[18], it’ll look for the 19th element, held in “b”.
+
+In the case of a structure, if you have a structure element called “sft_var.a”, it’ll look for the element “a” in the structure “sft_var”. 
+
+So a variable is evaluated directly by the value it contains. 
+
+The 3rd type of expression is what we call function calls. We write the name of the function, the parameters we’ll pass to this function, the compiler will call the function, and it’ll be evaluated to the function’s return value. We’ve seen that a function takes parameters for entry, does the process we ask it to do, and returns a value. So this value will be set instead of the function.
+
+In the following calculation, we’ll have a function.
+
+We can combine all these elements thanks to computations. This way, the compiler will process the arithmetics, and, as you can see below, we can write very complicated things. 
+
+If you write “1 + 3” it’ll take the 1, and add 3 to it. “-“ handles parenthesis and priorities, operations, there’s a b[0] which will get the first element of the array “b”, when it’ll write “a x 42”, it’ll go get the value of “a”, it’ll divide by the sum of the 2 elements, returned by the function sum(). 
+
+The compiler will manage to evaluate, calculate, the result of these arithmetic expressions and will do it in the right order.
+
+The last type of expressions: Assignations.
+
+An assignation, is for instance, when we write “a = 42”. The compiler will set the value “42” to the variable “a”, and will return, as a result, 42. We’ll systematically have assignation and an evaluation. 
+
+For example, if you write “b[2 + a]”, we’ll go get the value contained in “a”, and add 2 to it. This value serves as an index, to go read in the array “b”. 
+
+We’ll calculate the result of the function that’s on the right, we’ll assign it in the array, and we’ll return, as a result, the function’s result. It’s an assignation, and it’ll modify the data in the variable. 
+
+EXPRESSIONS:
+
+Immediate numerical values:
+    0    42    0x1A    010
+
+Variables:
+a        with int a; for instance.
+b[18]    with char b[63]; for instance
+sft_var.a    with a structure
+
+Function calls:
+sum(18, a)
+
+Computations: + - * / % ()
+1 + 3 - (a * 42 + b(0)/ sum[21, 34 -b[10])
+
+Assignations:
+a = 42
+b[2 + a] = sum(12, 30)
+sft_var.a = 0
+
+
+There are other expressions. We have what we call comparisons.
+
+A comparison in C, is an operator which will be evaluated, just like any other expression, to a value. 
+
+We call TRUE, the return value 1, and FALSE, the return value 0.
+
+So when you write, for instance, “a == b”, it’ll check if the content of variable “a”  is equal to the content of variable “b”. If both contents are equal, it’ll return 1, else it’ll return 0. All comparators work the same way. 
+
+Another example, if you write “a < b”, it’ll check the values of “a” and “b”, if “a” is indeed inferior to “b”, it’ll return 1, else it’ll return 0. 
+
+As operators, you have “==“, which compares equality, “!=“ means “different than”, “<“, “>”, “<=“, “>=“, “||” (logical OR), “&&” (logical AND) and “!!” which is a negation. 
+
+If we write “!a”, if “a” is worth 0, then it will return 1, else it returns 0.
+
+So these are comparison operators. We also have what we call binary operators. These operators will process the variable’s binary data directly. We’ll go into more details on this later on, because it’s not very useful for now, but it allows us to process each of the bits contained in variables. 
+
+Then we have shortcuts, which allow to facilitate the reading. For instance we can write “a += 10”, that’s just like writing “a = a + 10”.
+
+We could write “a++”, which is the same as writing “a = a + 1”. 
+
+We can write “/=“, that’s the same as doing a division. Those are just means to simplify writing. There are some special expression elements.
+
+For example ‘A’ returns the ASCII code for the character between apostrophes.
+
+Actually, the ASCII code for “A” is 65. 
+
+ASCII codes are extremely important, as they allow us to display characters. 
+
+There’s an ASCII table, but we’ll get back to this later on.
+
+We have the operator SIZEOF, we write the type of variable, of directly a variable and this will return the size this variable take up in the memory.  
+
+A last one: if we add an “&” before a variable, it’ll return the address of this variable, in the memory. 
+
+There’s what we call a ternary operator, even if we rarely use it. The syntax is as follows: and expression, “?”, a 2nd expression, “:”, a 3rd expression, and it’ll evaluate the first expression. If the expression isn’t NULL, it’ll evaluate the second, and if the expression isn’t NULL, it’ll evaluate the second, and return it as a value. Or else, it’ll evaluate the third expression, and return it as a value. So it’s a conditional expression.
+
+The last point, is what we call character strings. A string is a series of characters between inverted commas. This will allocate memory for the characters between inverted commas. It’ll add a “\0” in the end, and it’ll return the address of the first character. 
+
+EXPRESSIONS (again)
+
+Comparisons: == != < > <= >=    || && !
+            a < 2 +b[23]
+            a - 2 == 35||b[11]+3>=17
+
+Binary operations: >> << | & ^
+
+Shortcuts: a += 10 <->    a = a + 10
+           b [50] /= 2    <->        b[50]=b[50] /2
+           a++            <->        a+=1        <->        a = a + 1
+
+Specials:
+
+‘A’ <-> 65
+sizeof(type_or_var)
+&a     (address of variable a in RAM)
+exp1? exp2: exp3
+
+Strings:
+“hello forty-two” -> automatically stores a sequence of ascii codes in a char array ended by 0; evaluates to the address of the first char.
+
+
+We’ve seen, when we listed types, that there’s a particular type…
+
+Pointers.
+
+A pointer is a variable like the others, except that instead of storing data, it’ll store the address of another variable, well at least the data’s address. It’s a pointer to something, so, as the name suggests, it contains the address of something. 
+
+How to declare a pointer? First we have to declare the type of what we point to, meaning the variable’s type, whose address we want to store.
+
+So we write the type, “*”, the name.
+
+An example: If I write “int *p”, “p” stores the address of a variable of type int. 
+
+How do we use them? Quite simply.
+
+Once we’ve declared a pointer of type int, we write “p = &a”. We’ll set the address of “a” in “p”. Then we’ll use “*p”. We do “p = 1;” it’ll set “1” inside the address pointed by “p”.
+
+It’s the same as writing “a = 1”, as “p” contains the address of “a”, so if “p” contains the address of “a”, “*p” is the same thing as “a”. It’s the same memory area, the same address and the same type.
+
+Basically, we can say that “*name” so “*” the name of a variable, of type pointer, is the object of type “type” whose addresses is stored in “name”. That’s very important. You must systematically refer to this definition. When I have a pointer called “name”, of type “type”, *name is the object of type “type”, stored in “name”.
+
+So we have an arithmetics system.
+
+Let’s take an array “tab[42]”, so “p”, an object of type pointer, which stores the address of tab’s first element.
+
+If we write “*(p+x)”, we access the value located at the position “x” of our array, same as if we wrote “tab[x]”. 
+
+
+The pointers:
+
+Definition: a pointer is a variable that stores the memory address of another variable of a given type.
+
+Declaration: 
+
+  type *name;                                        int *p;
+  p stores the address of an int variable.
+
+Use: p = &a;        *p = 1; <-> a =1;
+If p stores the address of a, then *p is another name for the memory area of a;
+*name is the object of type type, the address of which is stored in name.
+
+Pointers arithmetic:
+
+Let    int tab[42];    and    p=&(tab[0]);
+tab[x]    <->    *(p+x)
+
+
+So. Up till now, we’ve seen variable declarations, instructions, and now we’re left with control structures. In C, there are several control structures. We’ll see 3.
+
+Actually, we’ll see 4, because 2 of them are very much alike. 
+
+The first is…the control structure IF. It’s quite simple:
+
+we write “if (expression)” and then, an instruction. This instruction can be a block, which means it can contain several instructions, and declarations. 
+
+How does it work? It’s simple:
+
+It evaluates the expression. So we’re going to calculate the result of the expression.
+
+If the expression returns 0, it doesn’t do anything. 
+
+If it returns something else than 0, it’ll execute the instruction. It’s a simple test, and quite practical to use.
+
+There’s a more elaborated version which is “if (expression){instruction} else {other instruction}” 
+
+As you can imagine, it evaluates the expression. 
+
+If the expression is worth 0, it executes the 2nd expression.
+
+If the expression is worth 1, it executes the 1st expression.
+
+It’s a rather simple thing. 
+
+Second control structure, the structure WHILE.
+
+The structure WHILE is quite simple: “while (expression), and an instruction.
+
+The process is a little different.
+
+The WHILE evaluates the expression. 
+
+If the expression is worth 0, it stops.
+
+If it’s worth something other than 0, we’ll execute the instruction. 
+
+So far, it’s just like with an IF, except that instead of stopping here, we loop.
+
+Which means we re-evaluate the expression.
+
+If the expression is worth 0, we stop, else, we execute the instruction again, and we go back to the start.
+
+As the name suggests, we’ll execute the instruction “while” the expression isn’t worth 0.
+
+That’s how all loops work. That’s how you’ll use the during this bootcamp. 
+
+There are other control structures, but you’ll just use these ones for now. 
+
+The last control structure: the structure RETURN, which allows to return a value at the exit of a function. As we’ve seen, the function takes parameters as entries, and returns a value upon exit. 
+
+RETURN allows us to return this value. 
+
+return(_) calculates the expression, and stops the function.
+
+This means that if there are other instructions after this “return”, they won’t be executed. 
+
+The function’s return value will be the result of the expression.
+
+There’s another type of RETURN without a return value, meant for a particular type of a function we haven’t seen yet, but you’ll see that later. Those are functions that can’t return values, and which have a different syntax.
+
+
+
+Control structures
+
+The if:
+
+    if(expression)
+            instruction
+
+    if(expression)
+            instruction
+    else
+            instruction
+
+
+The while:
+
+    while(expression)
+          instruction
+
+
+The return:
+
+      return(expression);
+      return;
